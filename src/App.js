@@ -23,8 +23,17 @@ class App extends React.Component {
     })
   }
 
-  handleChangeScore(id, delta) {
+  handleChangeScore = (id, delta) => {
     console.log('handleChangeScore: ', id, delta);
+    this.setState(prevState => {
+      const players = [ ...prevState.players ]; // deep copy
+      players.forEach(item => {
+        if (item.id === id) {
+          item.score += delta;
+        }
+      })
+      return { players: players }
+    })
   }
 
   render() {
